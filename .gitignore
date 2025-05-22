@@ -1,1 +1,6 @@
-js/requisicao.mjs
+# Ignore node_modules
+node_modules/
+
+
+
+
