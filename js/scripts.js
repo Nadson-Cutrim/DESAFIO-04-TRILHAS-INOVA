@@ -520,3 +520,137 @@ async function graficoIdeb() {
     loadingMsg.style.display = 'none';
   }
 }
+
+
+async function graficoAcessoInternet(){
+ const loadingMsg = document.getElementById('loading-internet');
+ 
+
+ const ctx = document.getElementById('internetChart').getContext('2d');
+ if (internetChartInstance) {
+    internetChartInstance.destroy();
+  }
+  loadingMsg.style.display = 'block';
+  const dadosAcessoInternet = await dadoAcessoInternet();
+
+  internetChartInstance = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: dadosAcessoInternet.anos,
+    datasets: [
+      {
+        label: '% Acesso à Internet',
+        data: dadosAcessoInternet.internet,
+        backgroundColor: 'rgb(0, 255, 209)',
+      },
+      {
+        label: '% Acesso à Banda Larga',
+        data: dadosAcessoInternet.bandaLarga,
+        backgroundColor: 'rgb(84, 9, 218)',
+      }
+      
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Acesso à Internet nas Escolas por Ano | ' +(cidadeSelect.value? cidadeSelect.options[cidadeSelect.selectedIndex].text+ "-" + estadoSelect.options[estadoSelect.selectedIndex].text: estadoSelect.options[estadoSelect.selectedIndex].text)
+      },
+      tooltip: {
+        mode: 'index',
+        intersect: false
+      },
+      legend: {
+        position: 'top'
+      },
+    },
+    scales: {
+      x: {
+        stacked: false,
+        title: {
+          display: true
+        }
+      },
+      y: {
+        stacked: false,
+        beginAtZero: true,
+        max: 100,
+        title: {
+          display: true,
+          text: 'Porcentagem (%)'
+        }
+      }
+    }
+  }
+})
+loadingMsg.style.display = 'none';
+}
+async function carregarInfraestrutura() {
+  const loadingMsg = document.getElementById('loading-Infraestrutura');
+  loadingMsg.style.display = 'block';
+  const ctx = document.getElementById('infraChart');
+  if (infraChartInstance) {
+    infraChartInstance.destroy();
+  }
+  const dadosInfraestrutura = await dadoInfraestrutura();
+  
+
+  infraChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: dadosInfraestrutura.Labels,
+      datasets: [{
+        label: '', // deixamos vazio ou removemos
+        data: dadosInfraestrutura.Values,
+        fill: true,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgb(75, 192, 192)',
+        pointBackgroundColor: 'rgb(75, 192, 192)'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: `Distribuição de Infraestrutura nas Escolas no ano de ${document.getElementById('ano').value} | `+ (cidadeSelect.value? cidadeSelect.options[cidadeSelect.selectedIndex].text+ "-" + estadoSelect.options[estadoSelect.selectedIndex].text: estadoSelect.options[estadoSelect.selectedIndex].text),
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const label = context.chart.data.labels[context.dataIndex];
+              const value = context.raw;
+              return `${value.toLocaleString()} escolas com ${label}`;
+            }
+          }
+        },
+        legend: {
+          display: false // ocultar legenda já que não usamos nome do dataset
+        }
+      },
+      scales: {
+         
+        y: {
+          beginAtZero: true,
+          suggestedMin: 30,
+          suggestedMax: 50,
+        }
+      }
+    }
+  });
+  loadingMsg.style.display = 'none';
+}
+
+// contruindo os graficos
+function carregarGraficos() {
+  graficoIdeb()
+  graficoAcessoInternet()
+  carregarInfraestrutura()
+  renderChart()
+
+}
+
