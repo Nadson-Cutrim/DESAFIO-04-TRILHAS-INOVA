@@ -40,8 +40,8 @@ Aplicação web que consome a **API pública do QEdu** para exibir dados do **Ce
 1. Clone este repositório:
 
 ```bash
-git clone https://github.com/Nadson-Cutrim/Test-Page.git
-cd Test-Page
+git clone https://github.com/Nadson-Cutrim/DESAFIO-04-TRILHAS-INOVA.git
+cd DESAFIO-04-TRILHAS-INOVA
 ```
 
 2. Crie uma conta e gere um token de acesso na plataforma do QEdu:
