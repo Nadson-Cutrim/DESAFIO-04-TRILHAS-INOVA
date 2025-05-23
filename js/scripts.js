@@ -1,21 +1,19 @@
-
-// Função para verificar se o elemento está visível na tela
 const collapse = document.getElementById('collapse')
 const nav = document.getElementById('nav')
 const ancora = document.querySelectorAll('nav a')
 
-// Verifica se collapse e nav existem antes de adicionar eventos
+
 if (collapse && nav) {
   collapse.addEventListener('click', () => {
     nav.classList.toggle('collapse-true')
     collapse.classList.toggle('open')
   })
 }
-// filtros aplicaves
+
 const estadoSelect = document.getElementById('estado');
 const cidadeSelect = document.getElementById('cidade');
 
-// Carrega os estados do Brasil
+
 fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
 .then(res => res.json())
 .then(estados => {
@@ -58,7 +56,7 @@ function carregarCidades(estadoId) {
     });
 }
 
-// Quando um estado for selecionado, carrega as cidades
+
 estadoSelect.addEventListener('change', () => {
   const estadoId = estadoSelect.value;
   if (estadoId) {
@@ -67,7 +65,7 @@ estadoSelect.addEventListener('change', () => {
   }
 });
 
-// tratamento dos dados
+
 const token = 'VWFtMhR85XttcftnC0hmdPbvgf8dTPkQwDF86XpI';
 
 async function dadosIdeb() {
@@ -191,11 +189,11 @@ async function dadoAcessoInternet() {
 async function dadoInfraestrutura() {
   const errorMsg = document.getElementById('error-Infraestrutura');
   const ano = document.getElementById('ano').value || 2024;
-  let estadoId = estadoSelect.value || 21; // Maranhão
+  let estadoId = estadoSelect.value || 21; 
   let cidadeId = cidadeSelect.value;
   let codigoIbge = cidadeId !== '' ? cidadeId : estadoId;
 
-  // dados retornados
+ 
   let soma_acessibilidade_escola = 0;
   let soma_alimentacao_fornecida = 0;
   let soma_alimentacao_agua_filtrada = 0;
@@ -288,7 +286,7 @@ async function dadoInfraestrutura() {
       soma_dependencias_sala_professores,
       soma_dependencias_sala_atendimento_especial
     ]
-  // Retorna os dois arrays para uso no gráfico
+
   return {
    Labels: labels,
    Values: values
@@ -348,8 +346,6 @@ async function buscarDadosEnem() {
         ];
 
         
-
-        
         loading.style.display = 'none';
        
         return { labels, values };
@@ -363,16 +359,12 @@ async function buscarDadosEnem() {
 }
 
 
-
-// variaves dos graficos 
 let idebChartInstance = null; 
 let internetChartInstance = null;
 let infraChartInstance = null;
 let enemChartInstance = null;
 
 
-
-// Verifica se existem links dentro do nav
 if (ancora.length > 0 && nav && collapse) {
   ancora.forEach((link) => {
     link.addEventListener('click', () => {
@@ -399,7 +391,7 @@ async function renderChart() {
       enemChartInstance.destroy();
       enemChartInstance = null;
     }
-    // Exibe a mensagem de carregamento
+    
     loadingMsg.style.display = 'block';
     errorMsg.style.display = 'none';
 
@@ -409,7 +401,7 @@ async function renderChart() {
       const anoSelecionado = document.getElementById('ano').value || 2019;
 
       let dados;
-    // Verifica se o gráfico já existe e o destrói
+    
     try{
       dados = await buscarDadosEnem();
     } catch (error) {
@@ -424,7 +416,7 @@ async function renderChart() {
       loadingMsg.style.display = 'none';
       return
     }
-// Após os dados serem carregados, esconder a mensagem de carregamento
+
     loadingMsg.style.display = 'none';
 
     enemChartInstance = new Chart(ctx, {
@@ -469,12 +461,12 @@ async function graficoIdeb() {
   const loadingMsg = document.getElementById('loading-ideb');
   const errorMsg = document.getElementById('error-ideb');
 
-  // Exibe a mensagem de carregamento
+  
   loadingMsg.style.display = 'block';
   errorMsg.innerHTML = '';
 
   try {
-    // Destroi o gráfico anterior, se existir
+    
     if (idebChartInstance) {
       idebChartInstance.destroy();
     }
@@ -516,7 +508,7 @@ async function graficoIdeb() {
     console.error(erro);
     errorMsg.innerHTML = 'Erro ao carregar os dados do IDEB.';
   } finally {
-    // Oculta a mensagem de carregamento
+    
     loadingMsg.style.display = 'none';
   }
 }
@@ -603,7 +595,7 @@ async function carregarInfraestrutura() {
     data: {
       labels: dadosInfraestrutura.Labels,
       datasets: [{
-        label: '', // deixamos vazio ou removemos
+        label: '',
         data: dadosInfraestrutura.Values,
         fill: true,
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -629,7 +621,7 @@ async function carregarInfraestrutura() {
           }
         },
         legend: {
-          display: false // ocultar legenda já que não usamos nome do dataset
+          display: false 
         }
       },
       scales: {
@@ -645,7 +637,7 @@ async function carregarInfraestrutura() {
   loadingMsg.style.display = 'none';
 }
 
-// contruindo os graficos
+
 function carregarGraficos() {
   graficoIdeb()
   graficoAcessoInternet()

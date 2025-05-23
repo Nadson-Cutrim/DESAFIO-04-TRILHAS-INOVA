@@ -26,8 +26,6 @@ body{
   transition: var(--effect-ease);
 }
 
-/* =============================== CSS DO MENU DE NAVEGAÇÃO ================================== */
-
 header{
   position: fixed;
   top: 0;
@@ -141,20 +139,6 @@ header .collapse.open span:nth-child(3) {
   background-color: var(--color-white);
 }
 
-/* =============================== CSS DO BOTÃO DARCK MODE ================================== */
-/*
-#darkModeToggle{
-  position: relative;
-  width: 3vmax;
-  height: 3vmax;
-  border: none;
-  background-color: transparent;
-  font-size: 1.7vmax;
-  cursor: pointer;
-}*/
-
-/* =============================== CSS DO BANNER ================================== */
-
 .edu-hero{
   position: relative;
   width: 100vw;
@@ -223,7 +207,6 @@ header .collapse.open span:nth-child(3) {
   cursor: pointer;
 }
 
-/* =============================== CSS SOBRE ================================== */
 
 .section-edu{
   position: relative;
@@ -276,8 +259,6 @@ header .collapse.open span:nth-child(3) {
   text-align: center;
 }
 
-/* =============================== CSS INDICADORES ================================== */
-
 .section-ind{
   position: relative;
   width: 100vw;
@@ -321,8 +302,6 @@ header .collapse.open span:nth-child(3) {
   margin: 1.5vmax 0;
   color: var(--color-black-smoker);
 }
-
-/* =============================== CSS PUBLICO ALVO ================================== */
 
 .section-card{
   position: relative;
@@ -385,8 +364,6 @@ header .collapse.open span:nth-child(3) {
   font-size: 1.1vmax;
 }
 
-/* =============================== CSS DASHBOARD ================================== */
-
 .section-dash{
   position: relative;
   background: url('../assets/img/background.png');
@@ -436,7 +413,6 @@ header .collapse.open span:nth-child(3) {
   text-decoration: none;
 }
 
-/* =============================== CSS RODAPÉ ================================== */
 
 .footer{
   position: relative;
@@ -559,8 +535,6 @@ header .collapse.open span:nth-child(3) {
 }
 
 
-/* =============================== ESTILIZAÇÕES PARA RESPONSIVIDADE 1300 ================================== */
-
 @media (max-width: 1300px){
   .section-ind{
     height: 100vh;
@@ -585,8 +559,6 @@ header .collapse.open span:nth-child(3) {
   
 }
 }
-
-/* =============================== ESTILIZAÇÕES PARA RESPONSIVIDADE 998 ================================== */
 
 @media (max-width: 998px) {
 
@@ -660,7 +632,7 @@ header .collapse.open span:nth-child(3) {
     margin: 0;
     width: 100%;
   }
-  /*=========================resposividade do footer===================*/
+ 
   .box-logo {
     flex-direction: column;
     align-items: center;
@@ -695,8 +667,6 @@ header .collapse.open span:nth-child(3) {
 
 }
 }
-
-/* =============================== ESTILIZAÇÕES PARA RESPONSIVIDADE 768 ================================== */
 
 @media (max-width: 778px) {
   .edu-hero{
@@ -779,7 +749,7 @@ header .collapse.open span:nth-child(3) {
   .section-card{
     height: auto;
   }
-/*=========================resposividade do footer===================*/
+
   .box-logo {
     flex-direction: column;
     align-items: center;
@@ -813,7 +783,6 @@ header .collapse.open span:nth-child(3) {
   
 }
 
-/* =============================== ESTILIZAÇÕES PARA RESPONSIVIDADE 458 ================================== */
 
 @media (max-width: 458px) {
   .edu-hero .edu-text p{
@@ -861,6 +830,3 @@ header .collapse.open span:nth-child(3) {
 
 }
 }
-
-
-

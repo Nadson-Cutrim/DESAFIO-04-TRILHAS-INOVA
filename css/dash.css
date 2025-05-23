@@ -26,7 +26,6 @@ body {
   transition: var(--effect-ease);
 }
 
-/* =============================== CSS DO MENU DE NAVEGAÇÃO ================================== */
 
 header {
   position: fixed;
@@ -142,7 +141,7 @@ header .collapse.open span:nth-child(3) {
   transition: var(--effect-ease);
   background-color: var(--color-white);
 }
-/* =============================== CSS FILTROS ================================== */
+
 .filtros select{
   width: auto;
   height: auto;
@@ -172,7 +171,6 @@ header .collapse.open span:nth-child(3) {
   overflow: hidden;
 }
 
-/* =============================== CSS GRÁFICOS ================================== */
 
 .graf-edu {
   position: relative;
@@ -211,7 +209,6 @@ header .collapse.open span:nth-child(3) {
   transform: translateY(5vmax);
 }
 
-/* =============================== CSS DASHBOARD ================================== */
 
 .section-land{
   position: relative;
@@ -261,8 +258,6 @@ header .collapse.open span:nth-child(3) {
   color: var(--color-blue-smoker);
   text-decoration: none;
 }
-
-/* =============================== CSS RODAPÉ ================================== */
 
 .footer {
   position: relative;
@@ -382,7 +377,6 @@ a {
 }
 
 
-/* =============================== CSS RESPONSIVO ================================== */
 
 @media (max-width: 1300px) {
  .filtros {
@@ -473,7 +467,6 @@ a {
     font-size: 15px;
   }
 
-  /*=========================resposividade do footer===================*/
 
   .footer {
     flex-direction: column;
@@ -493,7 +486,6 @@ a {
     width: 100%;
   }
 
-  /*========================= resposividade do footer ===================*/
 
   .box-logo {
     flex-direction: column;
@@ -598,8 +590,6 @@ a {
     width: 80%;
     font-size: 13px;
   }
-
-  /*=========================resposividade do footer===================*/
 
   footer {
     display: flex;
