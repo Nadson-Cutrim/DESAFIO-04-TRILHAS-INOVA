@@ -294,3 +294,229 @@ async function dadoInfraestrutura() {
    Values: values
   };
 }
+async function buscarDadosEnem() {
+    const loading = document.getElementById('loading-enem');
+    const error = document.getElementById('error-enem');
+
+    let cidadeId = cidadeSelect.value || 2111300;
+    let anoSelecionado = document.getElementById('ano').value || 2019;
+    const apiUrl = 'https://api.qedu.org.br/v1/enem';
+   
+
+    const params = { id: cidadeId, ano: anoSelecionado };
+    loading.style.display = 'block';
+    error.style.display = 'none';
+    
+
+    try {
+        const response = await axios.get(apiUrl, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            params
+        });
+
+        const listaDados = response.data.data;
+        if (!listaDados || listaDados.length === 0) {
+            throw new Error('Nenhum dado encontrado para o ENEM');
+        }
+
+        let somaLC = 0, somaMT = 0, somaCH = 0, somaCN = 0, somaRedacao = 0;
+        let total = 0;
+
+        listaDados.forEach(item => {
+            if (item.media_LC && item.media_MT && item.media_CH && item.media_CN && item.media_redacao) {
+                somaLC += parseFloat(item.media_LC);
+                somaMT += parseFloat(item.media_MT);
+                somaCH += parseFloat(item.media_CH);
+                somaCN += parseFloat(item.media_CN);
+                somaRedacao += parseFloat(item.media_redacao);
+                total++;
+            }
+        });
+
+        if (total === 0) throw new Error('Não há dados válidos para calcular a média');
+
+        const labels = ['Linguagens', 'Matemática', 'Ciências Humanas', 'Ciências da Natureza', 'Redação'];
+        const values = [
+            (somaLC / total).toFixed(2),
+            (somaMT / total).toFixed(2),
+            (somaCH / total).toFixed(2),
+            (somaCN / total).toFixed(2),
+            (somaRedacao / total).toFixed(2)
+        ];
+
+        
+
+        
+        loading.style.display = 'none';
+       
+        return { labels, values };
+
+    } catch (err) {
+        console.error('Erro ao buscar dados:', err);
+        error.textContent = 'Erro ao buscar dados do ENEM: ' + err.message;
+        error.style.display = 'block';
+        loading.style.display = 'none';
+    }
+}
+
+
+
+// variaves dos graficos 
+let idebChartInstance = null; 
+let internetChartInstance = null;
+let infraChartInstance = null;
+let enemChartInstance = null;
+
+
+
+// Verifica se existem links dentro do nav
+if (ancora.length > 0 && nav && collapse) {
+  ancora.forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('collapse-true')
+      collapse.classList.remove('open')
+    })
+  })
+}
+
+async function renderChart() {
+    const loadingMsg = document.getElementById('loading-enem');
+    const errorMsg = document.getElementById('error-enem');
+    const canvas = document.getElementById('enemChart');
+
+    if(!canvas){
+    console.error('Canvas enemChart não encontrado');
+    return;
+    }
+    const ctx = document.getElementById('enemChart').getContext('2d');
+
+
+    if (enemChartInstance) {
+      console.log('Destruindo gráfico existente...');
+      enemChartInstance.destroy();
+      enemChartInstance = null;
+    }
+    // Exibe a mensagem de carregamento
+    loadingMsg.style.display = 'block';
+    errorMsg.style.display = 'none';
+
+      const cidadeTitulo = cidadeSelect.options[cidadeSelect.selectedIndex]?.text || 'Cidade não selecionada';
+      const estado = cidadeSelect.options[cidadeSelect.selectedIndex]?.dataset.estado 
+      || estadoSelect.options[estadoSelect.selectedIndex]?.text || 'Estado não selecionado';
+      const anoSelecionado = document.getElementById('ano').value || 2019;
+
+      let dados;
+    // Verifica se o gráfico já existe e o destrói
+    try{
+      dados = await buscarDadosEnem();
+    } catch (error) {
+      console.error('Erro ao Buscar dados do ENEM:' , error)
+      errorMsg.style.display = 'block';
+      loadingMsg.style.display = 'none';
+      return;
+    }
+    if(!dados || !dados.labels || !dados.values) {
+      console.warn('Dados do ENEM indisponíveis ou inválidos.');
+      errorMsg.style.display = 'block';
+      loadingMsg.style.display = 'none';
+      return
+    }
+// Após os dados serem carregados, esconder a mensagem de carregamento
+    loadingMsg.style.display = 'none';
+
+    enemChartInstance = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: dados.labels,
+            datasets: [{
+                data: dados.values,
+                backgroundColor: ['#5409DA', '#C5172E', '#ffc107', '#ff5722', '#9c27b0']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: `${cidadeTitulo} - ${estado} - ENEM ${anoSelecionado}`
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            const label = context.label || '';
+                            const value = Number(context.raw);
+                            if (isNaN(value)) return label;
+                            return `${label}: ${value.toFixed(2)} pts`;
+                        }
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+
+async function graficoIdeb() {
+  const ctx = document.getElementById('idebChart').getContext('2d');
+  const loadingMsg = document.getElementById('loading-ideb');
+  const errorMsg = document.getElementById('error-ideb');
+
+  // Exibe a mensagem de carregamento
+  loadingMsg.style.display = 'block';
+  errorMsg.innerHTML = '';
+
+  try {
+    // Destroi o gráfico anterior, se existir
+    if (idebChartInstance) {
+      idebChartInstance.destroy();
+    }
+
+    const dadosIdebObtio = await dadosIdeb();
+
+   idebChartInstance = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['2019', '2017', '2015', '2013', '2011'],
+    datasets: [{
+      label: 'Nota IDEB',
+      data: dadosIdebObtio,
+      backgroundColor: ['#0079FF', '#00DFA2', '#ffc107', '#ff5722', '#9c27b0']
+            
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Evolução da Nota do IDEB |' + (cidadeSelect.value? cidadeSelect.options[cidadeSelect.selectedIndex].text+ "-" + estadoSelect.options[estadoSelect.selectedIndex].text: estadoSelect.options[estadoSelect.selectedIndex].text),
+      }, 
+      tooltip: {
+        mode: 'index',
+        intersect: false
+      },
+      legend: {
+        position: 'top'
+      },
+    }
+  }
+});
+
+
+  } catch (erro) {
+    console.error(erro);
+    errorMsg.innerHTML = 'Erro ao carregar os dados do IDEB.';
+  } finally {
+    // Oculta a mensagem de carregamento
+    loadingMsg.style.display = 'none';
+  }
+}
