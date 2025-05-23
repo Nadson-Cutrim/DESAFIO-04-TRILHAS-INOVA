@@ -1,0 +1,382 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  font-family: 'Sora', sans-serif;
+}
+
+:root {
+  --color-blue: #003cff;
+  --color-blue-smoker: #001d7d;
+  --color-gray: #F2F4F8;
+  --color-white: #fff;
+  --color-black-smoker: #21272A;
+  --color-black: #000;
+  --color-smoker: #697077;
+  --border-color: #DDE1E6;
+  --effect-ease: 0.3s all;
+}
+
+body {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  overflow-x: hidden;
+  transition: var(--effect-ease);
+}
+
+/* =============================== CSS DO MENU DE NAVEGAÇÃO ================================== */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vmax 3vmax;
+  background-color: var(--color-gray);
+  z-index: 99;
+
+}
+
+header .logo,
+nav {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+header .logo img {
+  width: 3.5vmax;
+  height: auto;
+  padding-right: 0.5vmax;
+}
+
+header .logo div span {
+  display: block;
+  font-size: 1.3vmax;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--color-black-smoker);
+}
+
+nav li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 9.5vmax;
+  height: 3vmax;
+  list-style: none;
+  margin: 0 0.5vmax;
+  cursor: pointer;
+  transition: var(--effect-ease);
+  border-radius: 10px;
+}
+
+nav li a {
+  text-decoration: none;
+  color: var(--color-black-smoker);
+  font-size: 1.1vmax;
+}
+
+nav li:hover {
+  background-color: var(--color-blue-smoker);
+  transition: var(--effect-ease);
+}
+
+nav li:hover a {
+  color: var(--color-white);
+  transition: var(--effect-ease);
+}
+
+header .collapse {
+  position: relative;
+  width: auto;
+  height: auto;
+  padding: 1vmax 1vmax;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+header .collapse span {
+  position: relative;
+  display: inline;
+  width: 5vmax;
+  height: 0.3vmax;
+  margin: 0.3vmax 0;
+  border-radius: 10px;
+  background-color: var(--color-black-smoker);
+  transition: var(--effect-ease);
+  transform-origin: center;
+}
+
+.collapse-true {
+  transform: translateX(0) !important;
+  transition: var(--effect-ease);
+}
+
+header .collapse.open span:nth-child(1) {
+  transform: rotate(45deg) translate(0.5vmax, 0.5vmax);
+  transition: var(--effect-ease);
+  background-color: var(--color-white);
+}
+
+header .collapse.open span:nth-child(2) {
+  display: none;
+}
+
+header .collapse.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(0.5vmax, -0.5vmax);
+  transition: var(--effect-ease);
+  background-color: var(--color-white);
+}
+/* =============================== CSS FILTROS ================================== */
+.filtros select{
+  width: auto;
+  height: auto;
+  padding: 0.5vmax 1.5vmax;
+  font-size: 0.7vmax;
+  border: 1px solid var(--color-smoker);
+  border-radius: 10px;
+  margin: 0.5vmax;
+  border: none;
+  color: var(--color-black);
+  background-color: var(--color-gray);
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.filtros {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 10vmax 0 0.5vmax 0;
+  padding: 0 7vmax;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* =============================== CSS GRÁFICOS ================================== */
+
+.graf-edu {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  display: flex;
+  padding: 5vmax 3vmax;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card-edu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 35vw;
+  height: 22vw;
+  background-color: var(--color-gray);
+  margin: 2vmax;
+  padding: 1.5vmax ;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-edu h2 {
+  font-size: 1.2em;
+  color: var(--color-black-smoker);
+}
+
+.graf-edu .card-edu .msg-loading{
+  font-size: 1.3vmax;
+  font-weight: bold;
+  color: var(--color-blue-smoker);
+  transform: translateY(5vmax);
+}
+
+/* =============================== CSS DASHBOARD ================================== */
+
+.section-land{
+  position: relative;
+  background: url('../assets/img/background.png');
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.section-land h1{
+  font-size: 2vmax;
+  color: var(--color-black-smoker);
+}
+
+.section-land p{
+  width: 30%;
+  margin: 2vmax 0;
+  text-align: center;
+  font-size: 1.1vmax;
+  color: var(--color-black-smoker);
+}
+
+.btn-grad {
+  background-image: linear-gradient(to right, #92ede8 0%, #0ED2F7  51%, #B2FEFA  100%);
+  width: auto;
+  height: auto;
+  padding: 1vmax 1.4vmax;
+  text-align: center;
+  text-transform: uppercase;
+  transition: var(--effect-ease);
+  background-size: 200% auto;
+  color: var(--color-black-smoker);            
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-grad:hover {
+  background-position: right center; 
+  color: var(--color-blue-smoker);
+  text-decoration: none;
+}
+
+/* =============================== CSS RODAPÉ ================================== */
+
+.footer {
+  position: relative;
+  width: 100vw;
+  height: 70vh;
+  background-color: var(--color-black-smoker);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5vmax;
+}
+
+.footer .box-logo {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2vmax;
+  align-items: center;
+  cursor: pointer;
+}
+
+.footer .box-logo img {
+  width: 8vmax;
+  height: auto;
+  padding-right: 0.5vmax;
+}
+
+.footer .box-logo div span {
+  display: block;
+  font-size: 2.5vmax;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.footer .box-infor {
+  position: relative;
+  width: 45vw;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1vmax;
+}
+
+.footer .box-infor ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer .box-infor ul li,
+a {
+  list-style: none;
+  text-decoration: none;
+  color: var(--color-white);
+  font-size: 1vmax;
+}
+
+.footer .box-infor ul li {
+  margin: 0 0 1vmax 0;
+}
+
+.footer .box-infor ul li .active {
+  font-size: 1.5vmax;
+  font-weight: bold;
+}
+
+.footer .box-social {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5vmax;
+}
+
+.footer .box-social div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2vmax;
+  border-radius: 50%;
+  margin: 0.5vmax;
+  cursor: pointer;
+  background-color: var(--color-white);
+}
+
+.footer .box-social div i {
+  font-size: 1.5vmax;
+  color: var(--color-blue-smoker);
+}
+
+.footer .copy {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: auto;
+  padding: 1vmax 0;
+  text-align: center;
+  background-color: var(--color-black-smoker);
+  border-top: 0.1vw solid var(--color-white);
+}
+
+#active {
+  font-size: 2rem;
+  font-weight: bold;
+
+}
+
+.footer .copy span {
+  font-size: 1vmax;
+  color: var(--color-white);
+}
