@@ -557,3 +557,310 @@ header .collapse.open span:nth-child(3) {
   font-size: 1vmax;
   color: var(--color-white);
 }
+
+
+/* =============================== ESTILIZAÇÕES PARA RESPONSIVIDADE 1300 ================================== */
+
+@media (max-width: 1300px){
+  .section-ind{
+    height: 100vh;
+  }
+
+  .section-card .card-grid{
+    justify-content: space-around;
+  }
+
+  .section-card .card-grid .card-item{
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+  }
+.box-infor ul li,a {
+
+    font-size: 0.9rem;
+  }
+#active{
+    font-size: 2rem;
+    font-weight: bold;
+  
+}
+}
+
+/* =============================== ESTILIZAÇÕES PARA RESPONSIVIDADE 998 ================================== */
+
+@media (max-width: 998px) {
+
+  header .collapse{
+    display: flex;
+  }
+
+  header .logo img{
+    width: 50px;
+  }
+  
+  header .logo div span{
+    font-size: 18px;
+  }
+  
+  nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: var(--color-blue-smoker);
+    transform: translateX(100vw);
+    transition: var(--effect-ease);
+    z-index: 999;
+  }
+  
+  nav li{
+    width: inherit;
+    pointer-events: none;
+  }
+
+  nav li a{
+    font-size: 20px;
+    color: var(--color-white);
+    pointer-events: all;
+  }
+
+  .section-edu .sobre-desc div p{
+    font-size: 12px;
+  }
+
+  .section-card .card-grid .card-item .box-text p{
+    font-size: 15px;
+  }
+
+  .section-dash h1{
+    font-size: 22px;
+  }
+
+  .section-dash p{
+    width: 50%;
+    font-size: 15px;
+  }
+
+  .footer{
+    flex-direction: column;
+    height: auto;
+  }
+
+  .footer .box-logo{
+    width: 100%;
+    justify-content: start;
+    padding: 50px 0;
+    border-bottom: 1px solid var(--color-white);
+  }
+  .footer .box-infor{
+    flex-direction: column;
+    margin: 0;
+    width: 100%;
+  }
+  /*=========================resposividade do footer===================*/
+  .box-logo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .box-infor {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .box-infor ul {
+    margin: 15px 0;
+  }
+
+  .box-infor ul li,a {
+    margin: 6px 0;
+    font-size: 1.5rem;
+  }
+#active{
+    font-size: 2rem;
+    font-weight: bold;
+  
+}
+  .box-social {
+    justify-content: center;
+  }
+
+#rdp-copy{
+  font-size: 1rem;
+
+}
+}
+
+/* =============================== ESTILIZAÇÕES PARA RESPONSIVIDADE 768 ================================== */
+
+@media (max-width: 778px) {
+  .edu-hero{
+    width: 100vw;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .edu-hero .edu-text{
+    width: inherit;
+    text-align: center;
+    margin: 70px 0 0 0;
+  }
+
+  .edu-hero .edu-text h1{
+    font-size: 25px;
+  }
+
+  .edu-hero .edu-text h2{
+    font-size: 20px;
+  }
+
+  .edu-hero .edu-text p{
+    width: 70vw;
+    font-size: 15px;
+  }
+
+  .edu-hero .edu-image img{
+    padding: 0;
+    width: 300px;
+  }
+
+  .edu-hero .btn-dash button{
+    font-size: 13px;
+  }
+
+  .section-edu h1{
+    font-size: 22px;
+    margin: 70px 0 30px 0;
+  }
+
+  .section-edu .sobre-desc{
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .section-edu .sobre-desc div{
+    width: 100%;
+    height: auto;
+    margin: 30px 0;
+    padding: 0 2vmax;
+  }
+
+  .section-edu .sobre-desc div h2{
+    font-size: 20px;
+  }
+
+  .section-edu .sobre-desc div img{
+    margin: 20px 0
+  }
+
+  .section-edu .sobre-desc div p{
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .section-ind{
+    height: auto;
+  }
+  .section-ind .edu-flex .edu-item{
+    width: 200px;
+    height: 150px;
+    margin: 25px;
+  }
+
+  .section-ind .edu-flex .edu-item h1{
+    font-size: 15px;
+  }
+
+  .section-card{
+    height: auto;
+  }
+/*=========================resposividade do footer===================*/
+  .box-logo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .box-infor {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .box-infor ul {
+    margin: 15px 0;
+  }
+
+  .box-infor ul li {
+    margin: 6px 0;
+  }
+#active{
+    font-size: 2rem;
+    font-weight: bold;
+  
+  }
+  .box-social {
+    justify-content: center;
+  }
+#rdp-copy{
+  font-size: 1rem;
+}
+  
+}
+
+/* =============================== ESTILIZAÇÕES PARA RESPONSIVIDADE 458 ================================== */
+
+@media (max-width: 458px) {
+  .edu-hero .edu-text p{
+    width: 100%;
+  }
+  .section-ind .edu-flex .edu-item{
+    width: 500px;
+    height: 200px;
+  }
+  .section-card .card-grid .card-item .box-text p{
+    font-size: 15px;
+  }
+
+   .box-logo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .box-infor {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .box-infor ul {
+    margin: 15px 0;
+  }
+
+  .box-infor ul li,a {
+    margin: 6px 0;
+    font-size: 1rem;
+  }
+#active{
+    font-size: 1rem;
+    font-weight: bold;
+  
+  }
+  .box-social {
+    justify-content: center;
+  }
+
+#rdp-copy{
+  font-size: 0.8rem;
+
+}
+}
+
+
+
